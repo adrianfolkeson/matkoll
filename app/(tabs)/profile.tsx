@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { useApp } from '../../context/AppContext'
 import { COLORS, SPACING, DEFAULT_GOALS } from '../../lib/constants'
 

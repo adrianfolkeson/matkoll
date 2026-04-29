@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tabs } from 'expo-router'
 import { View, Text, StyleSheet } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { COLORS } from '../../lib/constants'
 
 function TabIcon({ icon, label, focused }: { icon: string; label: string; focused: boolean }) {
@@ -14,11 +15,13 @@ function TabIcon({ icon, label, focused }: { icon: string; label: string; focuse
 
 export default function TabLayout() {
   return (
+    <SafeAreaProvider>
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tabs.Screen
@@ -54,6 +57,7 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    </SafeAreaProvider>
   )
 }
 
