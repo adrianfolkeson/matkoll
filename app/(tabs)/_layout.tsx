@@ -1,25 +1,31 @@
 import React from 'react'
 import { Tabs } from 'expo-router'
 import { View, Text, StyleSheet } from 'react-native'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { COLORS } from '../../lib/constants'
 
 function TabIcon({ icon, label, focused }: { icon: string; label: string; focused: boolean }) {
+  const isFocused = focused === true
   return (
     <View style={styles.tabItem}>
-      <Text style={[styles.icon, focused && styles.iconFocused]}>{icon}</Text>
-      <Text style={[styles.label, focused && styles.labelFocused]}>{label}</Text>
+      <Text style={[styles.icon, isFocused && styles.iconFocused]}>{icon}</Text>
+      <Text style={[styles.label, isFocused && styles.labelFocused]}>{label}</Text>
     </View>
   )
 }
 
 export default function TabLayout() {
   return (
-    <SafeAreaProvider>
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: {
+          height: 80,
+          paddingBottom: 24,
+          paddingTop: 8,
+          backgroundColor: COLORS.surface,
+          borderTopWidth: 1,
+          borderTopColor: COLORS.border,
+        },
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
       }}
@@ -27,7 +33,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon="🏠" label="Hem" focused={focused} />
           ),
         }}
@@ -35,7 +41,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="scan"
         options={{
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon="📷" label="Skanna" focused={focused} />
           ),
         }}
@@ -43,7 +49,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="history"
         options={{
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon="📅" label="Historik" focused={focused} />
           ),
         }}
@@ -51,28 +57,23 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon="👤" label="Profil" focused={focused} />
           ),
         }}
       />
     </Tabs>
-    </SafeAreaProvider>
   )
 }
 
 const styles = StyleSheet.create({
   tabBar: {
     height: 80,
-    paddingTop: 8,
     paddingBottom: 24,
+    paddingTop: 8,
     backgroundColor: COLORS.surface,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
   },
   tabItem: {
     alignItems: 'center',
