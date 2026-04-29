@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "MatKoll",
+    "slug": "matkoll",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "scheme": "matkoll",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#10B981"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.matkoll.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "MatKoll behöver tillgång till kameran för att skanna din mat",
+        "NSPhotoLibraryUsageDescription": "MatKoll behöver tillgång till dina bilder för att ladda upp matfoton"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#10B981"
+      },
+      "package": "com.matkoll.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "MatKoll behöver tillgång till kameran för att skanna din mat"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "MatKoll behöver tillgång till dina bilder för att ladda upp matfoton"
+        }
+      ]
+    ]
+  }
+}
