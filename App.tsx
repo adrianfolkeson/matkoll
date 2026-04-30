@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
-import { AppProvider } from '../context/AppContext'
-import { COLORS, SPACING } from '../lib/constants'
+import { AppProvider } from './context/AppContext'
+import { COLORS, SPACING } from './lib/constants'
 
 // Simple Tab Screens
 function HomeScreen({ navigation }: any) {
