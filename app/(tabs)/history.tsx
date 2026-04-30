@@ -28,7 +28,7 @@ export default function HistoryScreen() {
   }, [selectedDate, selectedFilter, user])
 
   const fetchMeals = async () => {
-    if (!user) return
+    if (!user || !supabase) return
 
     const startOfDay = new Date(selectedDate)
     startOfDay.setHours(0, 0, 0, 0)
@@ -52,6 +52,8 @@ export default function HistoryScreen() {
   }
 
   const deleteMeal = async (mealId: string) => {
+    if (!supabase) return
+    
     Alert.alert(
       'Ta bort måltid',
       'Är du säker på att du vill ta bort denna måltid?',

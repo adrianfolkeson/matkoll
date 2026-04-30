@@ -31,7 +31,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const fetchMeals = async (date: string = getTodayDate()) => {
-    if (!user) return
+    if (!user || !supabase) return
 
     const { data: meals, error } = await supabase
       .from('meals')
@@ -62,6 +62,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const fetchUser = async () => {
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
+
     const { data: { user: authUser } } = await supabase.auth.getUser()
     
     if (!authUser) {
@@ -98,7 +103,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [user])
 
   const setUserGoals = async (goals: { calories?: number; protein?: number; fat?: number }) => {
-    if (!user) return
+    if (!user || !supabase) return
 
     const updates: Partial<User> = {}
     if (goals.calories !== undefined) updates.daily_calorie_goal = goals.calories
@@ -116,7 +121,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const addMeal = async (meal: Omit<Meal, 'id' | 'user_id' | 'created_at'>) => {
-    if (!user) return
+    if (!user || !supabase) return
 
     const { error } = await supabase.from('meals').insert({
       user_id: user.id,
@@ -129,6 +134,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const deleteMeal = async (mealId: string) => {
+    if (!supabase) return
+
     const { error } = await supabase.from('meals').delete().eq('id', mealId)
 
     if (!error) {
