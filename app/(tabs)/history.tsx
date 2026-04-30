@@ -63,7 +63,9 @@ export default function HistoryScreen() {
           text: 'Ta bort',
           style: 'destructive',
           onPress: async () => {
-            await supabase.from('meals').delete().eq('id', mealId)
+            if (supabase) {
+              await supabase.from('meals').delete().eq('id', mealId)
+            }
             fetchMeals()
             refreshProgress()
           },
